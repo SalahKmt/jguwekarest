@@ -1,0 +1,31 @@
+Étapes à suivre afin de déployer Weka en Docker
+
+## Build l'image Docker
+
+* Télécharger le code source de GitHub   
+`git clone git@github.com:jguwekarest/jguwekarest.git`
+* accéder au dossier du code
+`cd jguwekarest`
+* Compiler l'application avec maven   
+  `mvn clean package`
+* Build l'image Docker (replace salahkmt par le nom d'utilisateur de votre docker hub)   
+  `docker build -t salahkmt/jguweka:OAS3 .`
+* lister les images    
+  `docker images`
+
+## exécuter l'image docker
+
+*Donner les droits nécessaire à Docker
+  `sudo usermod -a -G docker $USER`
+  `sudo chown "$USER":"$USER" /home/"$USER"/.docker -R`
+  `sudo chmod g+rwx "/home/$USER/.docker" -R`
+
+*  Pour exécuter dans un container local
+  `docker run -p 8080:8080 --link mongodb:mongodb salahkmt/jguweka:OAS3`
+
+* Si vous éxecutez le container locallement, n'oubliez pas de démarrer le contenneur de l'image 
+mangodb comme base de donnée :  
+  `docker pull mongo; docker run --name mongodb -d mongo`
+
+* charger la représentation Swagger-UI dans un web-browser   
+exemple.: `firefox http://0.0.0.0:8080`
