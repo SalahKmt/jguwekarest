@@ -19,7 +19,7 @@ services:
   haproxy:
     image: dockercloud/haproxy
     links:
-      - jguweka_0
+      - jguweka
     ports:
       - 80:80
     volumes:
